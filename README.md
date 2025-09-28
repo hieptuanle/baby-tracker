@@ -1,35 +1,53 @@
 # Baby Tracker
 
-A Progressive Web Application (PWA) for tracking baby activities including feeding, sleep, and diaper changes.
+A Progressive Web Application (PWA) for tracking pregnancy journey with gestational age calculation.
 
 ## Features
 
-- Track feeding sessions
-- Monitor sleep patterns
-- Record diaper changes
-- View activity history
-- Offline support with PWA capabilities
+- User authentication (register/login)
+- Track pregnancy information (Expected Delivery Date or Last Menstrual Period)
+- Calculate and display gestational age in weeks and days
+- Show days remaining until delivery
+- Display current trimester
+- Secure session management with JWT
+- PWA support with offline capabilities
 
 ## Tech Stack
 
-- Next.js
-- React
+- Hono (Web framework)
 - TypeScript
-- Tailwind CSS
-- Prisma with SQLite
+- SQLite (Better-SQLite3)
+- JWT Authentication
+- PM2 (Process Manager)
+- Winston (Logging)
 
 ## Getting Started
 
 ```bash
 # Install dependencies
-npm install
+pnpm install
 
 # Run development server
-npm run dev
+pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to view the application.
 
+## Deployment
+
+The application can be deployed using PM2:
+
+```bash
+# Start production server
+pnpm pm2:start
+
+# View logs
+pnpm pm2:logs
+
+# Check status
+pnpm pm2:status
+```
+
 ## License
 
-MIT
+ISC
