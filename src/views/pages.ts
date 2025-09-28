@@ -1,8 +1,9 @@
+import { html } from 'hono/html';
 import { layout } from './layout';
 import { GestationalAge } from '../utils/pregnancy';
 
 export const loginPage = (error?: string) => {
-  const content = `
+  const content = html`
     <div class="card">
       <h2>Login</h2>
       ${error ? `<div class="alert alert-error">${error}</div>` : ''}
@@ -59,7 +60,7 @@ export const loginPage = (error?: string) => {
 };
 
 export const registerPage = (error?: string) => {
-  const content = `
+  const content = html`
     <div class="card">
       <h2>Register</h2>
       ${error ? `<div class="alert alert-error">${error}</div>` : ''}
@@ -115,14 +116,12 @@ export const registerPage = (error?: string) => {
 };
 
 export const dashboardPage = (user: { username: string }, pregnancy?: any) => {
-  let content = '';
+  const age = pregnancy && pregnancy.gestationalAge as GestationalAge;
+  const edd = pregnancy && new Date(pregnancy.expected_delivery_date);
+  const daysRemaining = pregnancy && Math.floor((edd.getTime() - Date.now()) / (1000 * 60 * 60 * 24));
 
-  if (pregnancy && pregnancy.gestationalAge) {
-    const age = pregnancy.gestationalAge as GestationalAge;
-    const edd = new Date(pregnancy.expected_delivery_date);
-    const daysRemaining = Math.floor((edd.getTime() - Date.now()) / (1000 * 60 * 60 * 24));
-
-    content += `
+  const content = html`
+  ${pregnancy && pregnancy.gestationalAge ? html`
       <div class="gestational-info">
         <h2>${age.weeks} weeks, ${age.days} days</h2>
         <p>Current Gestational Age</p>
@@ -141,17 +140,12 @@ export const dashboardPage = (user: { username: string }, pregnancy?: any) => {
           </div>
         </div>
       </div>
-    `;
-  } else {
-    content += `
+    ` : html`
       <div class="card" style="background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%); text-align: center; padding: 2rem;">
         <h2 style="color: #2d3436; margin-bottom: 1rem;">👶 Welcome to Baby Tracker!</h2>
         <p style="color: #636e72; font-size: 1.1rem;">Enter your pregnancy information below to start tracking your journey.</p>
       </div>
-    `;
-  }
-
-  content += `
+    `}
     <div class="card">
       <h2>${pregnancy ? 'Update' : 'Enter'} Pregnancy Information</h2>
       <form onsubmit="return handlePregnancySubmit(event)">
@@ -219,11 +213,11 @@ export const dashboardPage = (user: { username: string }, pregnancy?: any) => {
     </script>
   `;
 
-  return layout('Dashboard', content, user);
+  return layout('Dashboard', html`${content}`, user);
 };
 
 export const homePage = () => {
-  const content = `
+  const content = html`
     <div class="card" style="text-align: center;">
       <h1 style="font-size: 3rem; margin-bottom: 1rem;">🍼 Baby Tracker</h1>
       <p style="font-size: 1.2rem; margin-bottom: 2rem;">Track your pregnancy journey with ease</p>

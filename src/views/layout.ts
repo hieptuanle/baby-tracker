@@ -1,4 +1,7 @@
-export const layout = (title: string, content: string, user?: { username: string }) => `
+import { html } from 'hono/html';
+
+
+export const layout = (title: string, content: ReturnType<typeof html>, user?: { username: string }) => html`
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -204,13 +207,13 @@ export const layout = (title: string, content: string, user?: { username: string
     <nav>
       <h1>🍼 Baby Tracker</h1>
       <div class="nav-links">
-        ${user ? `
+        ${user ? html`
           <span>Welcome, ${user.username}!</span>
           <a href="/dashboard">Dashboard</a>
           <form action="/api/auth/logout" method="POST" style="display: inline;">
             <button type="submit">Logout</button>
           </form>
-        ` : `
+        ` : html`
           <a href="/login">Login</a>
           <a href="/register">Register</a>
         `}

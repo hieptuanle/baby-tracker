@@ -22,8 +22,7 @@ app.use('*', loggingMiddleware);
 // Serve static files
 app.use('/static/*', serveStatic({ root: './' }));
 app.use('/manifest.json', serveStatic({ path: './public/manifest.json' }));
-// Service worker disabled due to caching issues
-// app.use('/service-worker.js', serveStatic({ path: './public/service-worker.js' }));
+
 app.use('/icons/*', serveStatic({ root: './public' }));
 
 // Apply auth middleware globally

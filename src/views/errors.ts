@@ -1,4 +1,6 @@
-export const notFoundPage = () => `
+import { html } from 'hono/html';
+
+export const notFoundPage = () => html`
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,7 +74,7 @@ export const notFoundPage = () => `
 </html>
 `;
 
-export const unauthorizedPage = () => `
+export const unauthorizedPage = () => html`
 <!DOCTYPE html>
 <html lang="en">
 <head>
