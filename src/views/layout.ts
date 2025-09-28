@@ -74,6 +74,7 @@ export const layout = (title: string, content: string, user?: { username: string
       border-radius: 10px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
       margin-bottom: 2rem;
+      overflow: hidden;
     }
     .form-group {
       margin-bottom: 1.5rem;
@@ -88,11 +89,15 @@ export const layout = (title: string, content: string, user?: { username: string
     input[type="password"],
     input[type="date"] {
       width: 100%;
+      max-width: 100%;
       padding: 0.75rem;
       border: 2px solid #e0e0e0;
       border-radius: 5px;
-      font-size: 1rem;
+      font-size: 16px;
       transition: border-color 0.3s;
+      box-sizing: border-box;
+      -webkit-appearance: none;
+      appearance: none;
     }
     input:focus {
       outline: none;
@@ -169,7 +174,13 @@ export const layout = (title: string, content: string, user?: { username: string
     }
     @media (max-width: 600px) {
       .card {
-        padding: 1.5rem;
+        padding: 1rem;
+      }
+      input[type="text"],
+      input[type="password"],
+      input[type="date"] {
+        padding: 0.625rem;
+        font-size: 16px;
       }
       .container {
         padding: 0 1rem;
