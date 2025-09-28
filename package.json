@@ -1,13 +1,41 @@
 {
   "name": "baby",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Baby Tracker - Pregnancy Journey PWA",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "typecheck": "tsc --noEmit",
+    "pm2:start": "pm2 start ecosystem.config.js --only baby-tracker",
+    "pm2:start-dev": "pm2 start ecosystem.config.js --only baby-tracker-dev",
+    "pm2:stop": "pm2 stop baby-tracker",
+    "pm2:restart": "pm2 restart baby-tracker",
+    "pm2:logs": "pm2 logs baby-tracker",
+    "pm2:status": "pm2 status",
+    "pm2:deploy": "pm2 deploy ecosystem.config.js production"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.17.1"
+  "packageManager": "pnpm@10.17.1",
+  "dependencies": {
+    "@hono/node-server": "^1.19.4",
+    "bcrypt": "^6.0.0",
+    "better-sqlite3": "^12.4.1",
+    "hono": "^4.9.9",
+    "jsonwebtoken": "^9.0.2",
+    "winston": "^3.17.0"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^24.5.2",
+    "@types/winston": "^2.4.4",
+    "nodemon": "^3.1.10",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.2"
+  }
 }
